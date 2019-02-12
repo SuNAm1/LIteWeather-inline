@@ -1,0 +1,13 @@
+{
+  "name": "weather-inline",
+  "id": "5c630557df55d572c98109b4",
+  "searchable": false,
+  "instancable": true,
+  "inline": true,
+  "width": 250,
+  "height": 250,
+  "servIndexes": {
+    "inline": "index",
+    "main": "index"
+  }
+}
