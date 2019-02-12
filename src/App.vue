@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { getDay, getMonth } from './helper/time.helper'
+import { getDay, getMonth, getInlineTheme } from './helper/time.helper'
 
 export default {
   name: 'weather-inline',
@@ -56,20 +56,19 @@ export default {
   },
   computed: {
     currentTime() {
-      return getTheme(this.date, this.isDay, true)
+      return getInlineTheme(this.date, this.isDay, 'card')
     },
   }
 }
 </script>
 
 <style>
-#app {
+.app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   width: 250px;
   height: 250px;
-  background: black;
   border-width: 100px;
   border-color:#707070;
 }
@@ -118,6 +117,7 @@ export default {
 
 .low img {
   vertical-align: middle;
+  margin-left: -10px;
 }
 
 .city {
@@ -135,7 +135,7 @@ export default {
   font-size: 20px;
 }
 
-.container-day {
+.card-day {
   background: #9ACED8;
   height: 250px;
   width: 250px;
@@ -144,11 +144,11 @@ export default {
   margin: auto;
 }  
 
-.container-night {
+.card-night {
   background: #484F60;
   height: 250px;
   width: 250px;
-  border: 3px solid #9ACED8;
+  border: 3px solid #606D7B;
   border-radius: 10px;
   margin: auto;
 } 
