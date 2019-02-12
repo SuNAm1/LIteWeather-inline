@@ -1,28 +1,180 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <div :class="currentTime">
+    <div class="top">
+      <div class="city"> Tehran IR</div>
+      <div class="date">{{day}} , {{date.getDate()}} {{month}} {{date.getFullYear()}}</div>
+    </div>     
+    <div class="middle">
+      <div class="temps">
+          <div class="temp">10{{currentTemp}}</div> 
+          <div class="temp_right">
+            <div class="temp_scale">
+                <span>&deg;C</span>
+            </div>
+            <div class="high"> <img src="./assets/high.svg"> 12{{maxTemp}} &deg; </div>
+            <div class="low"> <img src="./assets/low.svg"> 8{{minTemp}} &deg; </div>
+          </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <P>Sunny{{overcast}}</P>
+      <img :src="require(`./assets/${1 }.svg`)">
+    </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import { getDay, getMonth } from './helper/time.helper'
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  name: 'weather-inline',
+  data() {
+    return {
+      currentTemp: '',
+      minTemp: '',
+      maxTemp:'',
+      overcast: '',
+      icon: '',
+      isDay: true,
+      // city: '',
+      // country: '',
+      day: '',
+      month: '',
+      date: new Date(),
+    }
+  },
+  methods: {
+    getWeather() {
+
+    }
+  },
+  created() {
+    this.day = getDay()
+    this.month = getMonth()
+  },
+  computed: {
+    currentTime() {
+      return getTheme(this.date, this.isDay, true)
+    },
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 250px;
+  height: 250px;
+  background: black;
+  border-width: 100px;
+  border-color:#707070;
+}
+
+ .temps {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.temp {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: 'Open Sans';
+  font-size: 96px;
+}
+
+.temp_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.temp_scale {
+    padding-top: 5px;
+    color: rgba(255, 255, 255, 0.75);
+    font-family: 'Open Sans';
+    font-size: 26px;
+}
+
+.high {
+  padding-top: 5px;
+  font-family: Segoe UI;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.high img {
+  vertical-align: middle;
+}
+
+.low {
+  font-family: Segoe UI;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.low img {
+  vertical-align: middle;
+}
+
+.city {
+  font-family: Segoe UI;
+  font-size: 30px;
+  text-align: center;
+  color: white;
+}
+
+.date {
+  color: white;
+  font-family: roboto;
+  font-weight: 100;
+  text-align: center;
+  font-size: 20px;
+}
+
+.container-day {
+  background: #9ACED8;
+  height: 250px;
+  width: 250px;
+  border: 3px solid #484F60;
+  border-radius: 10px;
+  margin: auto;
+}  
+
+.container-night {
+  background: #484F60;
+  height: 250px;
+  width: 250px;
+  border: 3px solid #9ACED8;
+  border-radius: 10px;
+  margin: auto;
+} 
+
+.middle {
+  margin-top: -15px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bottom img {
+  width: 120px;
+  height: 120px;
+  margin-top: -45px;
+  margin-left: 68px;
+}
+
+.bottom p {
+  text-align: center;
+  font-family: roboto;
+  font-size: 20px;
+  color: white;
+  margin-top: -20px;
 }
 </style>
