@@ -1,65 +1,75 @@
 <template>
   <div class="app">
     <div :class="currentTime">
-    <div class="top">
-      <div class="city"> Tehran IR</div>
-      <div class="date">{{day}} , {{date.getDate()}} {{month}} {{date.getFullYear()}}</div>
-    </div>     
-    <div class="middle">
-      <div class="temps">
-          <div class="temp">10{{currentTemp}}</div> 
+      <div class="top">
+        <div class="city">Tehran IR</div>
+        <div class="date">{{day}} , {{date.getDate()}} {{month}} {{date.getFullYear()}}</div>
+      </div>
+      <div class="middle">
+        <div class="temps">
+          <div class="temp">{{currentTemp}}</div>
           <div class="temp_right">
             <div class="temp_scale">
-                <span>&deg;C</span>
+              <span>&deg;C</span>
             </div>
-            <div class="high"> <img src="./assets/high.svg"> 12{{maxTemp}} &deg; </div>
-            <div class="low"> <img src="./assets/low.svg"> 8{{minTemp}} &deg; </div>
+            <div class="high">
+              <img src="./assets/high.svg">
+              {{maxTemp}} &deg;
+            </div>
+            <div class="low">
+              <img src="./assets/low.svg">
+              {{minTemp}} &deg;
+            </div>
           </div>
+        </div>
       </div>
-    </div>
-    <div class="bottom">
-      <P>Sunny{{overcast}}</P>
-      <img :src="require(`./assets/${1 }.svg`)">
-    </div>
+      <div class="bottom">
+        <P>{{overcast}}</P>
+        <img :src="require(`./assets/${icon || 1}.svg`)">
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { getDay, getMonth, getInlineTheme } from './helper/time.helper'
+import { getDay, getMonth, getInlineTheme } from "./helper/time.helper";
+// helper
+import webliteHandler from "./helper/weblite.api";
+// W
+const { W } = window;
 
 export default {
-  name: 'weather-inline',
+  name: "weather-inline",
   data() {
     return {
-      currentTemp: '',
-      minTemp: '',
-      maxTemp:'',
-      overcast: '',
-      icon: '',
+      currentTemp: "",
+      minTemp: "",
+      maxTemp: "",
+      overcast: "",
+      icon: "",
       isDay: true,
       // city: '',
       // country: '',
-      day: '',
-      month: '',
-      date: new Date(),
-    }
-  },
-  methods: {
-    getWeather() {
-
-    }
+      day: "",
+      month: "",
+      date: new Date()
+    };
   },
   created() {
-    this.day = getDay()
-    this.month = getMonth()
+    this.day = getDay();
+    this.month = getMonth();
+
+    W && webliteHandler(this);
+  },
+  methods: {
+    getWeather() {}
   },
   computed: {
     currentTime() {
-      return getInlineTheme(this.date, this.isDay, 'card')
-    },
+      return getInlineTheme(this.date, this.isDay, "card");
+    }
   }
-}
+};
 </script>
 
 <style>
@@ -67,13 +77,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  width: 250px;
-  height: 250px;
-  border-width: 100px;
-  border-color:#707070;
+  /* width: 250px; */
+  height: 100%;
+  display: flex;
+  overflow: hidden;
 }
 
- .temps {
+.temps {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -81,21 +91,21 @@ export default {
 
 .temp {
   color: rgba(255, 255, 255, 0.75);
-  font-family: 'Open Sans';
+  font-family: "Open Sans";
   font-size: 96px;
 }
 
 .temp_right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .temp_scale {
-    padding-top: 5px;
-    color: rgba(255, 255, 255, 0.75);
-    font-family: 'Open Sans';
-    font-size: 26px;
+  padding-top: 5px;
+  color: rgba(255, 255, 255, 0.75);
+  font-family: "Open Sans";
+  font-size: 26px;
 }
 
 .high {
@@ -136,25 +146,27 @@ export default {
 }
 
 .card-day {
-  background: #9ACED8;
+  background: #1fb1ce;
   height: 250px;
   width: 250px;
-  border: 3px solid #484F60;
   border-radius: 10px;
   margin: auto;
-}  
+}
 
 .card-night {
-  background: #484F60;
+  background: #484f60;
   height: 250px;
   width: 250px;
-  border: 3px solid #606D7B;
   border-radius: 10px;
   margin: auto;
-} 
+}
+
+.top {
+  margin-top: 5px;
+}
 
 .middle {
-  margin-top: -15px;
+  margin-top: 5px;
 }
 
 .bottom {
@@ -166,8 +178,7 @@ export default {
 .bottom img {
   width: 120px;
   height: 120px;
-  margin-top: -45px;
-  margin-left: 68px;
+  margin: -45px auto;
 }
 
 .bottom p {
@@ -175,6 +186,7 @@ export default {
   font-family: roboto;
   font-size: 20px;
   color: white;
-  margin-top: -20px;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 </style>
