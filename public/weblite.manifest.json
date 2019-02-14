@@ -6,8 +6,10 @@
   "inline": true,
   "width": 250,
   "height": 250,
+  "customizeArray": [],
   "servIndexes": {
     "inline": "index",
     "main": "index"
-  }
+  },
+  "version": "1.0.1"
 }

@@ -7,25 +7,25 @@
       </div>
       <div class="middle">
         <div class="temps">
-          <div class="temp">10{{currentTemp}}</div>
+          <div class="temp">{{currentTemp}}</div>
           <div class="temp_right">
             <div class="temp_scale">
               <span>&deg;C</span>
             </div>
             <div class="high">
               <img src="./assets/high.svg">
-              12{{maxTemp}} &deg;
+              {{maxTemp}} &deg;
             </div>
             <div class="low">
               <img src="./assets/low.svg">
-              8{{minTemp}} &deg;
+              {{minTemp}} &deg;
             </div>
           </div>
         </div>
       </div>
       <div class="bottom">
-        <P>Sunny{{overcast}}</P>
-        <img :src="require(`./assets/${1 }.svg`)">
+        <P>{{overcast}}</P>
+        <img :src="require(`./assets/${icon || 1}.svg`)">
       </div>
     </div>
   </div>
@@ -77,10 +77,10 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  width: 250px;
-  height: 250px;
-  border-width: 100px;
-  border-color: #707070;
+  /* width: 250px; */
+  height: 100%;
+  display: flex;
+  overflow: hidden;
 }
 
 .temps {
@@ -146,10 +146,9 @@ export default {
 }
 
 .card-day {
-  background: #9aced8;
+  background: #1fb1ce;
   height: 250px;
   width: 250px;
-  border: 3px solid #484f60;
   border-radius: 10px;
   margin: auto;
 }
@@ -158,13 +157,16 @@ export default {
   background: #484f60;
   height: 250px;
   width: 250px;
-  border: 3px solid #606d7b;
   border-radius: 10px;
   margin: auto;
 }
 
+.top {
+  margin-top: 5px;
+}
+
 .middle {
-  margin-top: -15px;
+  margin-top: 5px;
 }
 
 .bottom {
@@ -176,8 +178,7 @@ export default {
 .bottom img {
   width: 120px;
   height: 120px;
-  margin-top: -45px;
-  margin-left: 68px;
+  margin: -45px auto;
 }
 
 .bottom p {
@@ -185,6 +186,7 @@ export default {
   font-family: roboto;
   font-size: 20px;
   color: white;
-  margin-top: -20px;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 </style>
